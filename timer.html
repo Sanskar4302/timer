@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+body {
+  background-color:  #00ECB9;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-weight: 100;
+}
+
+.countdown-timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #00ECB9
+}
+
+ul li {
+    padding: 20px;
+    border-radius: 6px;
+    background: #00BF96;
+    display: inline-block;
+}
+
+ul li span {
+    padding: 25px;
+    border-radius: 5px;
+    background: #00816A;
+    display: inline-block;
+}
+
+ul li span:nth-child(2) {
+  font-size: 20px;
+}
+
+.greet {
+  color: rgb(212, 125, 24);
+  font-size: 60px;
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 30px;
+}
+
+.coming-year {
+  font-size: 250px;
+  font-weight: 900;
+  color:#ffffff;
+}
+
+
+}
+</style>
+</head>
+<body>
+    <div class="countdown-timer">
+        <h1 class="greet">Timer </h1>
+        <ul>
+          <li>
+            <span class="days"></span>
+            <span>DAYS</span>
+          </li>
+          <li>
+            <span class="hours"></span>
+            <span>HOURS</span>
+          </li>
+          <li>
+            <span class="minutes"></span>
+            <span>MINUTES</span>
+          </li>
+          <li>
+            <span class="seconds"></span>
+            <span>SECONDS</span>
+          </li>
+        </ul>
+        <p class="coming-year"></p>
+      </div>
+    </body>
+    
+    </html>
+<script>
+const comingYear = document.querySelector(".coming-year");
+const birthDate = prompt("Enter birth date (1-31):");
+const birthMonth = prompt("Enter birth month (1-12):");
+const today = new Date();
+var nextYear;
+if (today.getMonth() + 1 > birthMonth || (today.getMonth() + 1 == birthMonth && today.getDate() + 1 > birthDate)) {
+  nextYear = new Date().getFullYear() + 1;
+}
+else {
+  nextYear = new Date().getFullYear();
+}
+comingYear.innerHTML = nextYear;
+function countdown() {
+  const remaining = new Date(`${nextYear}-${birthMonth}-${birthDate} 00:00:00`) - new Date();
+  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(remaining / (1000 * 60 * 60)) % 24;
+  const minutes = Math.floor(remaining / (1000 * 60)) % 60;
+  const seconds = Math.floor(remaining / 1000) % 60;
+  document.querySelector(".days").innerHTML = days;
+  document.querySelector(".hours").innerHTML = hours;
+  document.querySelector(".minutes").innerHTML = minutes;
+  document.querySelector(".seconds").innerHTML = seconds;
+}
+countdown()
+setInterval(countdown, 1000);
+</script>
+</body>
+</html>
